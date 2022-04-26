@@ -54,7 +54,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // 화면 고정
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
         baseLinearLayout = findViewById(R.id.baseLinearLayout);
@@ -64,7 +63,6 @@ public class MainActivity extends AppCompatActivity {
         permission_layout = findViewById(R.id.permission_layout);
         permission_button = findViewById(R.id.permission_button);
 
-        // 카메라 탭을 클릭했을 때는 모든 뷰 제거 후 카메라 inflate
         cameraTab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -94,7 +92,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        // 갤러리 탭을 클릭했을 때는 모든 뷰 제거 후 갤러리 inflate
         galleryTab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -127,7 +124,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        // 필요 권한 '다시 묻지 않음' 에 체크할 시 앱 세팅화면으로 이동할 수 있게끔 해줌
         permission_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -153,7 +149,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onRestart() {
         super.onRestart();
 
-        // restart시 권한 끄고 다시 들어올 경우 처음부터 재시작한다
         if(ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED
                 || ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED
                 || ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED){
@@ -162,7 +157,6 @@ public class MainActivity extends AppCompatActivity {
             return;
         }
 
-        // targetBitmap 이나 croppedBitmap이 가비지 컬렉터에 의해 비워진 경우 이를 재시작한다
         else if(baseLinearLayout.getChildAt(0) instanceof ImageCropLayout || baseLinearLayout.getChildAt(0) instanceof FilterLayout){
             if(null == targetBitmap || null == croppedBitmap){
                 cameraTab.performClick();
@@ -183,9 +177,6 @@ public class MainActivity extends AppCompatActivity {
         if(null != galleryPickerLayout) galleryPickerLayout.onDestroy();
     }
 
-
-    // 1단계 스택에 있는건 GalleryPickerLayout이나 CapturePhotoLayout으로, 그대로 종료시켜 줌
-    // 2단계 스택에 있는건 ImageCropLayout으로, 갤러리에서 갔는지 카메라에서 갔는지 판단하여 적절한 클릭버튼 누르는 액션을 해줌으로써 1단계 스택으로 돌려준다
     @Override
     public void onBackPressed() {
         if(baseLinearLayout.getChildAt(0) instanceof GalleryPickerLayout ||
@@ -206,7 +197,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void removeAllViewsSafely(){
-        // 카메라가 동작중일 경우 먼저 끄고 removeAllview를 실행한다
         if(null != capturePhotoLayout) {
             capturePhotoLayout.onStop();
             capturePhotoLayout.onDestroy();
@@ -220,8 +210,6 @@ public class MainActivity extends AppCompatActivity {
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
 
-
-        // 필요한 권한을 모두 수행했을 때는 바로 올바른 동작을 실행하게끔 해줌
         if (!ArrayUtils.contains(grantResults, PackageManager.PERMISSION_DENIED)){
             if(RequestCodes.CapturePhotoLayout == requestCode){
                 cameraTab.performClick();
@@ -232,7 +220,6 @@ public class MainActivity extends AppCompatActivity {
             }
         }
 
-        // 다시 묻지 않음에 체크할 때는 앱 세팅으로 이동할 수 있게끔 layout을 visible하게 만들어준다
         else{
             for (int i = 0, len = permissions.length; i < len; i++) {
                 String permission = permissions[i];

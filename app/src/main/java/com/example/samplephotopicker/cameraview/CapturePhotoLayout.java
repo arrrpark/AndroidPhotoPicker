@@ -115,10 +115,8 @@ public class CapturePhotoLayout extends LinearLayout {
         takePicture.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-//                cameraView.takePicture();
                 baseActivity.targetBitmap = ((TextureView)cameraView.getChildAt(0)).getBitmap();
 
-                // fullScreen이 아닐 경우엔 bitmap을 잘라준다
                 if(!baseActivity.isCameraFull){
                     int rectOneSide;
                     if(baseActivity.targetBitmap.getWidth() < baseActivity.targetBitmap.getHeight())
@@ -152,13 +150,6 @@ public class CapturePhotoLayout extends LinearLayout {
         baseActivity = null;
 
         reverse = null; screen = null;
-//        mCallback = null;
-
-//        if(null != mBackgroundHandler){
-//            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR2) mBackgroundHandler.getLooper().quitSafely();
-//            else mBackgroundHandler.getLooper().quit();
-//            mBackgroundHandler = null;
-//        }
     }
 
 }

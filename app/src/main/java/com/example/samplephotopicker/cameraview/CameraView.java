@@ -523,22 +523,4 @@ public class CameraView extends FrameLayout {
             return true;
         }
     }
-
-//    @Override
-//    public boolean onInterceptTouchEvent(MotionEvent ev) {
-//        if (mImpl == null) return super.onTouchEvent(ev);
-//
-//        int action = ev.getActionMasked();
-//
-//        if (ev.getPointerCount() == 2) { //Multi touch.
-//            if (action == MotionEvent.ACTION_POINTER_UP || action == MotionEvent.ACTION_UP) {
-//                mImpl.onPinchFingerUp();
-//            } else {
-//                mImpl.zoom(ev);
-//            }
-//            return true;
-//        } else { //Single touch point, needs to return true in order to detect one more touch point
-//            return true;
-//        }
-//    }
 }

@@ -29,41 +29,6 @@ public class CapturePhotoLayout extends LinearLayout {
         }
     }
 
-//    private CameraView.Callback mCallback = new CameraView.Callback() {
-//
-//        @Override
-//        public void onCameraOpened(CameraView cameraView) {
-//            Log.d("tag", "onCameraOpened");
-//        }
-//
-//        @Override
-//        public void onCameraClosed(CameraView cameraView) {
-//            Log.d("tag", "onCameraClosed");
-//        }
-//
-//        @Override
-//        public void onPictureTaken(CameraView cameraView, final byte[] data) {
-//            baseActivity.targetBitmap = ((TextureView)cameraView.getChildAt(0)).getBitmap();
-//
-//            // fullScreen이 아닐 경우엔 bitmap을 잘라준다
-//            if(!baseActivity.isCameraFull){
-//                int rectOneSide;
-//                if(baseActivity.targetBitmap.getWidth() < baseActivity.targetBitmap.getHeight())
-//                    rectOneSide = baseActivity.targetBitmap.getWidth();
-//                else
-//                    rectOneSide = baseActivity.targetBitmap.getHeight();
-//                baseActivity.targetBitmap = Bitmap.createBitmap(baseActivity.targetBitmap, 0, 0, rectOneSide, rectOneSide);
-//            }
-//
-//            baseActivity.targetFile = null;
-//            baseActivity.tabLayout.setVisibility(View.GONE);
-//            baseActivity.baseLinearLayout.removeAllViews();
-//            baseActivity.baseLinearLayout.addView(new ImageCropLayout(baseActivity));
-//            onStop();
-//            onDestroy();
-//        }
-//    };
-
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     public CapturePhotoLayout(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
@@ -117,7 +82,6 @@ public class CapturePhotoLayout extends LinearLayout {
         else cameraView.setFlash(CameraView.FACING_BACK);
 
         cameraView.start();
-//        cameraView.addCallback(mCallback);
 
         reverse.setOnClickListener(new OnClickListener() {
             @Override
@@ -149,10 +113,7 @@ public class CapturePhotoLayout extends LinearLayout {
         takePicture.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-//                cameraView.takePicture();
                 baseActivity.targetBitmap = ((TextureView)cameraView.getChildAt(0)).getBitmap();
-
-                // fullScreen이 아닐 경우엔 bitmap을 잘라준다
                 if(!baseActivity.isCameraFull){
                     int rectOneSide;
                     if(baseActivity.targetBitmap.getWidth() < baseActivity.targetBitmap.getHeight())
@@ -186,13 +147,6 @@ public class CapturePhotoLayout extends LinearLayout {
         baseActivity = null;
 
         reverse = null; screen = null;
-//        mCallback = null;
-
-//        if(null != mBackgroundHandler){
-//            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR2) mBackgroundHandler.getLooper().quitSafely();
-//            else mBackgroundHandler.getLooper().quit();
-//            mBackgroundHandler = null;
-//        }
     }
 
 }

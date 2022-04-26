@@ -20,7 +20,6 @@ public class GalleryGridViewLayoutAdapter extends RecyclerView.Adapter<GalleryGr
     Context context;
     private List<ImageExtended> mFiles;
 
-    // Gif 파일일 경우 작은 gridview에서는 재생하지 않는다.
     RequestOptions imageItemOptions = new RequestOptions().override(350, 350).centerCrop().dontAnimate();
 
     public void setItems(List<ImageExtended> items) {
@@ -43,8 +42,6 @@ public class GalleryGridViewLayoutAdapter extends RecyclerView.Adapter<GalleryGr
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, final int position){
-
-        // 체크된 것은 흐리게, 아닌 것은 그대로 표시한다
         if(mFiles.get(position).getSelected()) holder.mImageView.setAlpha(0.4f);
         else holder.mImageView.setAlpha(1.0f);
 

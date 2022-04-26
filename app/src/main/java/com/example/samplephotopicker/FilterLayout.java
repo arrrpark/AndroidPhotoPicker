@@ -117,14 +117,12 @@ public class FilterLayout extends LinearLayout {
         preview.setLayoutParams(layoutParams);
         addView(baseView);
 
-        // 리사이클러뷰를 이용한 이미지 필터 설정
         Glide.with(baseActivity).load(baseActivity.croppedBitmap).into(preview);
         filters = getFilters();
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(baseActivity);
         linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
         filterRecyclerView.setAdapter(new filterAdapter(filters));
         filterRecyclerView.setLayoutManager(linearLayoutManager);
-//        filterRecyclerView.addOnItemTouchListener(itemClickListener);
         filterRecyclerView.getAdapter().notifyDataSetChanged();
 
         // Contrast, Saturation, Warmth 조절
@@ -141,7 +139,6 @@ public class FilterLayout extends LinearLayout {
         warmthSeekBar.getProgressDrawable().setColorFilter(Color.RED, PorterDuff.Mode.SRC_IN);
         warmthSeekBar.getThumb().setColorFilter(Color.RED, PorterDuff.Mode.SRC_IN);
 
-        // 뒤로가기 설정
         back.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -152,7 +149,7 @@ public class FilterLayout extends LinearLayout {
                 contrastSeekBar.setProgress(50); saturationSeekBar.setProgress(50); warmthSeekBar.setProgress(50);
             }
         });
-        // 다음으로, 파일로 저장하기 설정
+
         next.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -260,7 +257,6 @@ public class FilterLayout extends LinearLayout {
         }
     }
 
-    // 필터들을 더한다
     private ArrayList<Object> getFilters(){
         ArrayList<Object> tmpFilters = new ArrayList<>();
         tmpFilters.add(null);
@@ -397,7 +393,6 @@ public class FilterLayout extends LinearLayout {
         return screenshotFile;
     }
 
-    //사진 찍은 이후에는 콘텐트 프로바이더에 바로 저장해주어, 갤러리에서 선택해서 활용할 수 있도록 해준다.
     public Uri addImageToGallery(ContentResolver cr, String imgType, File filepath){
         ContentValues values = new ContentValues();
 
@@ -412,7 +407,6 @@ public class FilterLayout extends LinearLayout {
         return cr.insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values);
     }
 
-    // bitmap의 화질을 낮춰서 가져온다
     private Bitmap resizeBitmap(Bitmap source){
         Bitmap result = null;
         int resizedWidth = 180;
@@ -423,7 +417,6 @@ public class FilterLayout extends LinearLayout {
         return result;
     }
 
-    // Bitmap의 바깥영역을 자른다
     private Bitmap cutBitmap(Bitmap source, ImageFilterView imageFilterView){
         Bitmap result = null;
         RectF bounds = new RectF();

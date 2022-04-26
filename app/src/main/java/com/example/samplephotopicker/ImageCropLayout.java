@@ -57,7 +57,6 @@ public class ImageCropLayout extends LinearLayout {
 
         addView(baseView);
 
-        // 갤러리에서 이미지를 얻을 경우 content uri를 세팅해주고, 카메라일경우 텍스쳐뷰에서 얻은 bitmap을 세팅해준다
         if(null == baseActivity.targetBitmap) icv_cropImageView.setImageUriAsync(GalleryGridViewLayout.getImageContentUriFromFile(baseActivity, baseActivity.targetFile));
         else icv_cropImageView.setImageBitmap(baseActivity.targetBitmap);
 
