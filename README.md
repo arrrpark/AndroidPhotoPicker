@@ -5,6 +5,7 @@ This project is a sample projects that allows users to edit and apply filters to
 This project uses traditional MVC style with Java. Contens Provider, Camera2Api, RecyclerView and SeekBar are used to make the project.
 
 This project constists of only one activity - MainActivity
+
 On a single activity, it has 4 layout.
 - GalleryPickerLayout : User can pick a picture from the phone's gallery
 - CameraPhotoLayout : User can get a picture from the phone's camera
